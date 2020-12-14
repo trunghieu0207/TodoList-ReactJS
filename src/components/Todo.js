@@ -5,7 +5,6 @@ const Todo = (props) => {
         props.setTodo(props.toDos.filter((todo) => todo.id !== props.toDo.id));
     }
     const completeHandler = () => {
-        console.log(props.toDo);
         props.setTodo(props.toDos.map((item) => {
             if (item.id === props.toDo.id) {
                 return {
