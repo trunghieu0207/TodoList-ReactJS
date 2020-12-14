@@ -9,8 +9,14 @@ function App() {
     const [status, setStatus] = useState('all');
     const [filterTodo, setFilterTodo] = useState([]);
 
+
     useEffect(() => {
-        console.log('aloo')
+        getFromLocalStorage();
+    }, []);
+
+    useEffect(() => {
+        filterHandler();
+        saveToLocalStorage();
     }, [toDos, status]);
 
     const filterHandler = () => {
@@ -25,6 +31,26 @@ function App() {
                 setFilterTodo(toDos);
         }
     }
+
+    const saveToLocalStorage = () => {
+        // if (localStorage.getItem('toDos') === null) {
+        //     localStorage.setItem('toDos', JSON.stringify([]))
+        // } else {
+        //     localStorage.setItem('toDos', JSON.stringify(toDos));
+        // }
+
+        localStorage.setItem('toDos', JSON.stringify(toDos));
+    }
+
+    const getFromLocalStorage = () => {
+        if (localStorage.getItem('toDos') === null) {
+            localStorage.setItem('toDos', JSON.stringify([]))
+        } else {
+            const dataFromLocal = localStorage.getItem('toDos');
+            setToDos(JSON.parse(dataFromLocal));
+        }
+    }
+
     return (
         <div className="App">
             <header>
@@ -36,7 +62,7 @@ function App() {
                 setToDos={setToDos}
                 setInputText={setInputText}
                 setStatus={setStatus}/>
-            <ToDoList toDos={toDos} setToDos={setToDos}/>
+            <ToDoList toDos={toDos} setToDos={setToDos} filterTodo={filterTodo}/>
         </div>
     );
 }
