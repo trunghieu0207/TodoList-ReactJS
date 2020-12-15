@@ -1,16 +1,25 @@
-import React from 'react';
-import Todo from './Todo';
+import React from "react";
+import Todo from "./Todo";
 
-const ToDoList = (props) => {
-    return (
-        <div className="todo-container">
-            <ul className="todo-list">
-                {props.filterTodo.map((toDo) =>
-                    <Todo toDo={toDo} key={toDo.id} setTodo={props.setToDos} toDos={props.toDos}/>
-                )}
-            </ul>
-        </div>
-    );
+export default class ToDoList extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <div className="todo-container">
+                <ul className="todo-list">
+                    {this.props.filterHandler.map((todo) => (
+                        <Todo
+                            todo={todo}
+                            key={todo.id}
+                            todos={this.props.todos}
+                            setTodos={this.props.setTodos}
+                        />
+                    ))}
+                </ul>
+            </div>
+        );
+    }
 }
-
-export default ToDoList;

@@ -1,70 +1,90 @@
-import './App.css';
-import React, {useEffect, useState} from "react";
+import "./App.css";
+import React from "react";
 import Form from "./components/Form";
 import ToDoList from "./components/ToDoList";
 
-function App() {
-    const [inputText, setInputText] = useState('');
-    const [toDos, setToDos] = useState([]);
-    const [status, setStatus] = useState('all');
-    const [filterTodo, setFilterTodo] = useState([]);
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { todos: [], inputText: "", filterHandler: [], status: "all" };
+        this.setTodos = this.setTodos.bind(this);
+        this.setInputText = this.setInputText.bind(this);
+        this.setStatus = this.setStatus.bind(this);
+    }
 
+    setInputText(inputText) {
+        this.setState({
+            inputText: inputText,
+        });
+    }
 
-    useEffect(() => {
-        getFromLocalStorage();
-    }, []);
+    componentDidMount() {
+        this.filterHandler();
+    }
 
-    useEffect(() => {
-        filterHandler();
-        saveToLocalStorage();
-    }, [toDos, status]);
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevState.status !== this.state.status || this.state.todos.length !== prevState.todos.length) {
+            this.filterHandler();
+        }
+    }
 
-    const filterHandler = () => {
-        switch (status) {
-            case 'completed':
-               setFilterTodo(toDos.filter((todo) => todo.completed === true));
-               break;
-            case 'uncompleted':
-                setFilterTodo(toDos.filter((todo) => todo.completed === false));
+    setTodos(value) {
+        this.setState({
+            todos: value,
+        });
+    }
+
+    setFilterTodos(todos) {
+        this.setState({
+            filterHandler: todos,
+        });
+    }
+
+    setStatus(status) {
+        this.setState({
+            status: status,
+        });
+    }
+
+    filterHandler() {
+        switch (this.state.status) {
+            case "completed":
+                this.setFilterTodos(
+                    this.state.todos.filter((todo) => todo.completed === true)
+                );
+                break;
+            case "uncompleted":
+                this.setFilterTodos(
+                    this.state.todos.filter((todo) => todo.completed === false)
+                );
                 break;
             default:
-                setFilterTodo(toDos);
+                this.setFilterTodos(this.state.todos);
         }
     }
 
-    const saveToLocalStorage = () => {
-        // if (localStorage.getItem('toDos') === null) {
-        //     localStorage.setItem('toDos', JSON.stringify([]))
-        // } else {
-        //     localStorage.setItem('toDos', JSON.stringify(toDos));
-        // }
-
-        localStorage.setItem('toDos', JSON.stringify(toDos));
+    render() {
+        return (
+            <div className="App">
+                <header>
+                    <h1>Todo List</h1>
+                </header>
+                <Form
+                    setTodos={this.setTodos}
+                    setInputText={this.setInputText}
+                    todos={this.state.todos}
+                    inputText={this.state.inputText}
+                    setStatus={this.setStatus}
+                    filterHanlder={this.filterHandler}
+                />
+                <ToDoList
+                    todos={this.state.todos}
+                    setTodos={this.setTodos}
+                    filterHandler={this.state.filterHandler}
+                />
+            </div>
+        );
     }
-
-    const getFromLocalStorage = () => {
-        if (localStorage.getItem('toDos') === null) {
-            localStorage.setItem('toDos', JSON.stringify([]))
-        } else {
-            const dataFromLocal = localStorage.getItem('toDos');
-            setToDos(JSON.parse(dataFromLocal));
-        }
-    }
-
-    return (
-        <div className="App">
-            <header>
-                <h1>Todo List</h1>
-            </header>
-            <Form
-                inputText={inputText}
-                toDos={toDos}
-                setToDos={setToDos}
-                setInputText={setInputText}
-                setStatus={setStatus}/>
-            <ToDoList toDos={toDos} setToDos={setToDos} filterTodo={filterTodo}/>
-        </div>
-    );
 }
 
 export default App;

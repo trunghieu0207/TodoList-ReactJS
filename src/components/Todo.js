@@ -1,27 +1,50 @@
-import React  from 'react';
+import React from "react";
 
-const Todo = (props) => {
-    const deleteHandler = () => {
-        props.setTodo(props.toDos.filter((todo) => todo.id !== props.toDo.id));
+export default class Todo extends React.Component {
+    constructor(props) {
+        super(props);
+        this.deleteHandler = this.deleteHandler.bind(this);
+        this.completedHandler = this.completedHandler.bind(this);
     }
-    const completeHandler = () => {
-        props.setTodo(props.toDos.map((item) => {
-            if (item.id === props.toDo.id) {
-                return {
-                    ...item, completed: !item.completed,
+
+    deleteHandler() {
+        this.props.setTodos(
+            this.props.todos.filter((todo) => todo.id !== this.props.todo.id)
+        );
+    }
+
+    completedHandler() {
+        console.log(this.props.todo);
+        this.props.setTodos(
+            this.props.todos.map((item) => {
+                if (item.id === this.props.todo.id) {
+                    return {
+                        ...item,
+                        completed: !item.completed,
+                    };
                 }
-            }
-
-            return item;
-        }));
+                return item;
+            })
+        );
     }
-    return (
-        <div className={'todo'}>
-            <li className={`todo-item ${props.toDo.completed ? 'completed' : ''}`}>{props.toDo.text}</li>
-            <button onClick={completeHandler} className={'complete-btn'}><i className={'fas fa-check'}></i></button>
-            <button onClick={deleteHandler} className={'trash-btn'}><i className={'fas fa-trash'}></i></button>
-        </div>
-    );
-}
 
-export default Todo;
+    render() {
+        return (
+            <div className={"todo"}>
+                <li
+                    className={`todo-item ${
+                        this.props.todo.completed ? "completed" : ""
+                    }`}
+                >
+                    {this.props.todo.text}
+                </li>
+                <button className={"complete-btn"} onClick={this.completedHandler}>
+                    <i className={"fas fa-check"}/>
+                </button>
+                <button className={"trash-btn"} onClick={this.deleteHandler}>
+                    <i className={"fas fa-trash"}/>
+                </button>
+            </div>
+        );
+    }
+}
