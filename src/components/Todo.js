@@ -14,7 +14,6 @@ export default class Todo extends React.Component {
     }
 
     completedHandler() {
-        console.log(this.props.todo);
         this.props.setTodos(
             this.props.todos.map((item) => {
                 if (item.id === this.props.todo.id) {

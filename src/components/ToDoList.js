@@ -14,7 +14,7 @@ export default class ToDoList extends React.Component {
                         <Todo
                             todo={todo}
                             key={todo.id}
-                            todos={this.props.todos}
+                            todos={this.props.filterHandler}
                             setTodos={this.props.setTodos}
                         />
                     ))}

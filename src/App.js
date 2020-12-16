@@ -10,6 +10,7 @@ class App extends React.Component {
         this.setTodos = this.setTodos.bind(this);
         this.setInputText = this.setInputText.bind(this);
         this.setStatus = this.setStatus.bind(this);
+        this.setFilterTodos = this.setFilterTodos.bind(this);
     }
 
     setInputText(inputText) {
@@ -79,7 +80,7 @@ class App extends React.Component {
                 />
                 <ToDoList
                     todos={this.state.todos}
-                    setTodos={this.setTodos}
+                    setTodos={this.setFilterTodos}
                     filterHandler={this.state.filterHandler}
                 />
             </div>
