@@ -10,11 +10,11 @@ export default class ToDoList extends React.Component {
         return (
             <div className="todo-container">
                 <ul className="todo-list">
-                    {this.props.filterHandler.map((todo) => (
+                    {this.props.todos.map((todo) => (
                         <Todo
                             todo={todo}
                             key={todo.id}
-                            todos={this.props.filterHandler}
+                            todos={this.props.todos}
                             setTodos={this.props.setTodos}
                         />
                     ))}

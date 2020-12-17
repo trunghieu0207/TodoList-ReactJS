@@ -24,9 +24,8 @@ export default class Form extends React.Component {
 
     statusHandler(event) {
         const status = event.target.value;
-        this.props.setStatus(status);
+        this.props.onChangeFilter(status);
     }
-
 
     render() {
         return (
@@ -42,10 +41,15 @@ export default class Form extends React.Component {
                         type="submit"
                         onClick={(event) => this.submitHandler(event)}
                     >
-                        <i className="fas fa-plus-square"/>
+                        <i className="fas fa-plus-square" />
                     </button>
                     <div className="select">
-                        <select name="todos" onClick={(event) => this.statusHandler(event)} className="filter-todo">
+                        <select
+                            name="todos"
+                            onChange={(event) => this.statusHandler(event)}
+                            className="filter-todo"
+                            value={this.props.filter}
+                        >
                             <option value="all">All</option>
                             <option value="completed">Completed</option>
                             <option value="uncompleted">Uncompleted</option>

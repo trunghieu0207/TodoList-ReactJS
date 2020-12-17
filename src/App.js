@@ -6,27 +6,16 @@ import ToDoList from "./components/ToDoList";
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { todos: [], inputText: "", filterHandler: [], status: "all" };
+        this.state = { todos: [], inputText: "", filter: 'all' };
         this.setTodos = this.setTodos.bind(this);
         this.setInputText = this.setInputText.bind(this);
-        this.setStatus = this.setStatus.bind(this);
-        this.setFilterTodos = this.setFilterTodos.bind(this);
+        this.handleChangeFilter = this.handleChangeFilter.bind(this);
     }
 
     setInputText(inputText) {
         this.setState({
             inputText: inputText,
         });
-    }
-
-    componentDidMount() {
-        this.filterHandler();
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevState.status !== this.state.status || this.state.todos.length !== prevState.todos.length) {
-            this.filterHandler();
-        }
     }
 
     setTodos(value) {
@@ -41,30 +30,25 @@ class App extends React.Component {
         });
     }
 
-    setStatus(status) {
+    handleChangeFilter(status) {
         this.setState({
-            status: status,
+            filter: status,
         });
     }
 
-    filterHandler() {
-        switch (this.state.status) {
+    filterTodosToDisplay() {
+        switch (this.state.filter) {
             case "completed":
-                this.setFilterTodos(
-                    this.state.todos.filter((todo) => todo.completed === true)
-                );
-                break;
+                return this.state.todos.filter((todo) => todo.completed === true)
             case "uncompleted":
-                this.setFilterTodos(
-                    this.state.todos.filter((todo) => todo.completed === false)
-                );
-                break;
+                return this.state.todos.filter((todo) => todo.completed === false);
             default:
-                this.setFilterTodos(this.state.todos);
+                return this.state.todos;
         }
     }
 
     render() {
+        const todos = this.filterTodosToDisplay();
         return (
             <div className="App">
                 <header>
@@ -75,12 +59,13 @@ class App extends React.Component {
                     setInputText={this.setInputText}
                     todos={this.state.todos}
                     inputText={this.state.inputText}
-                    setStatus={this.setStatus}
-                    filterHanlder={this.filterHandler}
+                    onChangeFilter={this.handleChangeFilter}
+                    filter={this.state.filter}
+                    filterHanlder={this.filterTodosToDisplay}
                 />
                 <ToDoList
-                    todos={this.state.todos}
-                    setTodos={this.setFilterTodos}
+                    todos={todos}
+                    setTodos={this.setTodos}
                     filterHandler={this.state.filterHandler}
                 />
             </div>

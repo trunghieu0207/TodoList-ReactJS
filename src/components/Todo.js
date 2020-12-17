@@ -14,6 +14,7 @@ export default class Todo extends React.Component {
     }
 
     completedHandler() {
+        console.log(this.props.todo);
         this.props.setTodos(
             this.props.todos.map((item) => {
                 if (item.id === this.props.todo.id) {
@@ -38,10 +39,10 @@ export default class Todo extends React.Component {
                     {this.props.todo.text}
                 </li>
                 <button className={"complete-btn"} onClick={this.completedHandler}>
-                    <i className={"fas fa-check"}/>
+                    <i className={"fas fa-check"} />
                 </button>
                 <button className={"trash-btn"} onClick={this.deleteHandler}>
-                    <i className={"fas fa-trash"}/>
+                    <i className={"fas fa-trash"} />
                 </button>
             </div>
         );
