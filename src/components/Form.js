@@ -1,31 +1,62 @@
-import React from 'react';
+import React from "react";
 
-const Form = ({setInputText, setToDos, toDos, inputText, setStatus}) => {
-    const inputTextHandler = (e) => {
-        setInputText(e.target.value);
+export default class Form extends React.Component {
+    constructor(props) {
+        super(props);
     }
-    const submitHandler = (e) => {
-        e.preventDefault();
-        setToDos([...toDos, {text: inputText, completed: false, id: Math.random() * 1000}]);
+
+    handlerInputText(event) {
+        this.props.setInputText(event.target.value);
     }
-    const statusHandler = (e) => {
-        setStatus(e.target.value);
+
+    submitHandler(event) {
+        event.preventDefault();
+        let todos = this.props.todos;
+        this.props.setTodos([
+            ...todos,
+            {
+                text: this.props.inputText,
+                completed: false,
+                id: Math.random() * 1000,
+            },
+        ]);
     }
-    return (
-        <form>
-            <input type="text" className="todo-input" onChange={inputTextHandler}/>
-            <button className="todo-button" type="submit" onClick={submitHandler}>
-                <i className="fas fa-plus-square"></i>
-            </button>
-            <div className="select">
-                <select onClick={statusHandler} name="todos" className="filter-todo">
-                    <option value="all">All</option>
-                    <option value="completed">Completed</option>
-                    <option value="uncompleted">Uncompleted</option>
-                </select>
+
+    statusHandler(event) {
+        const status = event.target.value;
+        this.props.onChangeFilter(status);
+    }
+
+    render() {
+        return (
+            <div>
+                <form>
+                    <input
+                        type="text"
+                        className="todo-input"
+                        onChange={(event) => this.handlerInputText(event)}
+                    />
+                    <button
+                        className="todo-button"
+                        type="submit"
+                        onClick={(event) => this.submitHandler(event)}
+                    >
+                        <i className="fas fa-plus-square" />
+                    </button>
+                    <div className="select">
+                        <select
+                            name="todos"
+                            onChange={(event) => this.statusHandler(event)}
+                            className="filter-todo"
+                            value={this.props.filter}
+                        >
+                            <option value="all">All</option>
+                            <option value="completed">Completed</option>
+                            <option value="uncompleted">Uncompleted</option>
+                        </select>
+                    </div>
+                </form>
             </div>
-        </form>
-    );
+        );
+    }
 }
-
-export default Form;
