@@ -36,6 +36,30 @@ class App extends React.Component {
         });
     }
 
+    saveToLocalStorage() {
+        localStorage.setItem('todos', JSON.stringify(this.state.todos));
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if ((prevState.todos !== this.state.todos) || (this.state.filter !== prevState.filter)) {
+            this.saveToLocalStorage();
+        }
+    }
+
+    componentDidMount() {
+        this.getFromLocalStorage();
+    }
+
+    getFromLocalStorage() {
+        if (localStorage.getItem('todos') == null) {
+            localStorage.setItem('todos', JSON.stringify([]));
+        }
+        const todos = localStorage.getItem('todos');
+        this.setState({
+            todos: JSON.parse(todos),
+        })
+    }
+
     filterTodosToDisplay() {
         switch (this.state.filter) {
             case "completed":
