@@ -12,6 +12,7 @@ const todos = {
 
 // This default export determines where your story goes in the story list
 const handleClick = action('click');
+
 export default {
     title: 'My Component/Form',
     component: Form,
