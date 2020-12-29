@@ -1,7 +1,14 @@
 import './App.css';
+// @ts-ignore
 import React, {useEffect, useState} from "react";
 import Form from "./components/Form";
 import ToDoList from "./components/ToDoList";
+
+export interface TodoInterface {
+    completed: boolean;
+    text: string;
+    id: string;
+}
 
 function App() {
     const [inputText, setInputText] = useState('');
@@ -22,10 +29,10 @@ function App() {
     const filterHandler = () => {
         switch (status) {
             case 'completed':
-               setFilterTodo(toDos.filter((todo) => todo.completed === true));
+               setFilterTodo(toDos.filter((todo: TodoInterface) => todo.completed));
                break;
             case 'uncompleted':
-                setFilterTodo(toDos.filter((todo) => todo.completed === false));
+                setFilterTodo(toDos.filter((todo: TodoInterface) => !todo.completed));
                 break;
             default:
                 setFilterTodo(toDos);
@@ -33,20 +40,14 @@ function App() {
     }
 
     const saveToLocalStorage = () => {
-        // if (localStorage.getItem('toDos') === null) {
-        //     localStorage.setItem('toDos', JSON.stringify([]))
-        // } else {
-        //     localStorage.setItem('toDos', JSON.stringify(toDos));
-        // }
-
         localStorage.setItem('toDos', JSON.stringify(toDos));
     }
 
     const getFromLocalStorage = () => {
-        if (localStorage.getItem('toDos') === null) {
+        const dataFromLocal = localStorage.getItem('toDos');
+        if (dataFromLocal === null) {
             localStorage.setItem('toDos', JSON.stringify([]))
         } else {
-            const dataFromLocal = localStorage.getItem('toDos');
             setToDos(JSON.parse(dataFromLocal));
         }
     }
