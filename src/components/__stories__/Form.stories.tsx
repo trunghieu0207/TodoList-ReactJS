@@ -3,6 +3,7 @@ import { Story } from '@storybook/react';
 
 import Form from '../Form';
 import {action} from "@storybook/addon-actions";
+import {Meta} from "@storybook/react/types-6-0";
 
 const todos = {
     completed: true,
@@ -16,7 +17,7 @@ const handleClick = action('click');
 export default {
     title: 'My Component/Form',
     component: Form,
-};
+} as Meta;
 
 const Template: Story<ComponentProps<typeof Form>> = (args) => (
     <Form {...args} />

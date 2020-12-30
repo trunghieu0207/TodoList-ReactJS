@@ -1,6 +1,5 @@
 // @ts-ignore
-import React, {ChangeEvent} from 'react';
-import Todo from '../App';
+import React from 'react';
 
 const Form = ({setInputText, setToDos, toDos, inputText, setStatus}: {setInputText: any, setToDos: any, toDos: any, inputText: string, setStatus: any}) => {
     const inputTextHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
