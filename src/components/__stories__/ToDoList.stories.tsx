@@ -3,7 +3,7 @@ import {action} from "@storybook/addon-actions";
 import {Story} from "@storybook/react/types-6-0";
 import {TodoInterface} from "../../App";
 
-interface ToDoListPropsStory extends ToDoListProps{
+interface ToDoListPropsStory extends ToDoListProps {
     toDo?: TodoInterface;
 }
 

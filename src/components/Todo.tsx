@@ -26,7 +26,7 @@ const Todo = (props: { setTodo: SetTodo; toDos: TodoInterface[]; toDo: TodoInter
         }));
     }
 
-    const [bgCompleteBtn,  setBgCompleteBtn] = useState('');
+    const [bgCompleteBtn, setBgCompleteBtn] = useState('');
 
     const styleCompleteBtn = {
         backgroundColor: `${bgCompleteBtn}`
@@ -35,8 +35,10 @@ const Todo = (props: { setTodo: SetTodo; toDos: TodoInterface[]; toDo: TodoInter
     return (
         <div className={'todo'}>
             <li className={`todo-item ${props.toDo.completed ? 'completed' : ''}`}>{props.toDo.text}</li>
-            <button onClick={completeHandler} style={styleCompleteBtn} className={'complete-btn'} onMouseEnter={() => setBgCompleteBtn('rgb(9 160 123)')} onMouseLeave={() => setBgCompleteBtn('')}><i className={'fas fa-check'}/></button>
-            <button onClick={deleteHandler} className={'trash-btn'}><i className={'fas fa-trash'} /></button>
+            <button onClick={completeHandler} style={styleCompleteBtn} className={'complete-btn'}
+                    onMouseEnter={() => setBgCompleteBtn('rgb(9 160 123)')} onMouseLeave={() => setBgCompleteBtn('')}><i
+                className={'fas fa-check'}/></button>
+            <button onClick={deleteHandler} className={'trash-btn'}><i className={'fas fa-trash'}/></button>
         </div>
     );
 }

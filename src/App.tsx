@@ -28,8 +28,8 @@ function App() {
     const filterHandler = () => {
         switch (status) {
             case 'completed':
-               setFilterTodo(toDos.filter((todo: TodoInterface) => todo.completed));
-               break;
+                setFilterTodo(toDos.filter((todo: TodoInterface) => todo.completed));
+                break;
             case 'uncompleted':
                 setFilterTodo(toDos.filter((todo: TodoInterface) => !todo.completed));
                 break;
