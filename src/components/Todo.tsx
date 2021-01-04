@@ -1,12 +1,21 @@
 import React, {useState} from 'react';
+import {TodoInterface} from '../App'
 
-const Todo = (props) => {
+type SetTodo = (arg0: any) => void;
+
+export interface TodoProps {
+    setTodo: SetTodo;
+    toDos: TodoInterface[];
+    toDo: TodoInterface;
+}
+
+const Todo = (props: { setTodo: SetTodo; toDos: TodoInterface[]; toDo: TodoInterface; }) => {
     const deleteHandler = () => {
-        props.setTodo(props.toDos.filter((todo) => todo.id !== props.toDo.id));
+        props.setTodo(props.toDos.filter((todo: TodoInterface) => todo.id !== props.toDo.id));
     }
 
     const completeHandler = () => {
-        props.setTodo(props.toDos.map((item) => {
+        props.setTodo(props.toDos.map((item: TodoInterface) => {
             if (item.id === props.toDo.id) {
                 return {
                     ...item, completed: !item.completed,

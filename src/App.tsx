@@ -1,5 +1,4 @@
 import './App.css';
-// @ts-ignore
 import React, {useEffect, useState} from "react";
 import Form from "./components/Form";
 import ToDoList from "./components/ToDoList";
@@ -7,7 +6,7 @@ import ToDoList from "./components/ToDoList";
 export interface TodoInterface {
     completed: boolean;
     text: string;
-    id: string;
+    id: number;
 }
 
 function App() {

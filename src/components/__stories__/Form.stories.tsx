@@ -1,15 +1,22 @@
 import React, { ComponentProps } from 'react';
 import { Story } from '@storybook/react';
-
 import Form from '../Form';
 import {action} from "@storybook/addon-actions";
 import {Meta} from "@storybook/react/types-6-0";
+import {TodoInterface} from "../../App";
 
-const todos = {
-    completed: true,
-    text: 'string',
-    id: Math.random() * 1000,
-}
+const todos: TodoInterface[] = [
+    {
+        completed: true,
+        text: 'string',
+        id: Math.random() * 1000,
+    },
+    {
+        completed: true,
+        text: 'string',
+        id: Math.random() * 1000,
+    }
+]
 
 // This default export determines where your story goes in the story list
 const handleClick = action('click');

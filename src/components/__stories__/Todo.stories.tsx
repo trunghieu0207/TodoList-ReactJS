@@ -1,5 +1,6 @@
-import ToDoList from "../ToDoList";
+import Todo, {TodoProps} from "../Todo";
 import {action} from "@storybook/addon-actions";
+import {Story} from "@storybook/react/types-6-0";
 
 const todos = [
     {
@@ -13,20 +14,20 @@ const todos = [
         id: Math.random() * 1000,
     },
 ]
-
 const handleClick = action('click');
 
 export default {
-    title: 'My Component/TodoList',
-    component: ToDoList
+    title: 'My Component/Todo',
+    component: Todo
 }
-const Template = (args) => (
-    <ToDoList {...args}/>
-);
+
+const Template: Story<TodoProps> = (args) => (
+    <Todo {...args}/>
+)
 
 export const TodoStories = Template.bind({});
 TodoStories.args = {
-    filterTodo: todos,
-    setToDos: handleClick,
+    toDos: todos,
+    setTodo: handleClick,
     toDo: todos[0]
 };

@@ -1,7 +1,17 @@
-// @ts-ignore
 import React, {useState} from 'react';
+import {TodoInterface} from '../App'
 
-const Form = ({setInputText, setToDos, toDos, inputText, setStatus}: {setInputText: Function, setToDos: Function, toDos: any, inputText: string, setStatus: Function}) => {
+type SetFunction = (arg: any) => void;
+
+interface FormInputParams {
+    setInputText: SetFunction;
+    setToDos: SetFunction;
+    toDos: TodoInterface[];
+    inputText: string;
+    setStatus: SetFunction
+}
+
+const Form = ({setInputText, setToDos, toDos, inputText, setStatus}: FormInputParams) => {
     const inputTextHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputText(e.target.value);
     }
