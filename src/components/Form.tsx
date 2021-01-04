@@ -1,25 +1,34 @@
 // @ts-ignore
-import React from 'react';
+import React, {useState} from 'react';
 
-const Form = ({setInputText, setToDos, toDos, inputText, setStatus}: {setInputText: any, setToDos: any, toDos: any, inputText: string, setStatus: any}) => {
+const Form = ({setInputText, setToDos, toDos, inputText, setStatus}: {setInputText: Function, setToDos: Function, toDos: any, inputText: string, setStatus: Function}) => {
     const inputTextHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputText(e.target.value);
     }
+
     const submitHandler = (e: React.FormEvent) => {
         e.preventDefault();
         setToDos([...toDos, {text: inputText, completed: false, id: Math.random() * 1000}]);
     }
+
     const statusHandler = (e: any) => {
         setStatus(e.target.value);
     }
+
+    const [color, setColor] = useState('');
+
+    const applyStyle = {
+        backgroundColor: `${color}`
+    }
+
     return (
         <form>
             <input type="text" className="todo-input" onChange={inputTextHandler}/>
             <button className="todo-button" type="submit" onClick={submitHandler}>
-                <i className="fas fa-plus-square"></i>
+                <i className="fas fa-plus-square"/>
             </button>
             <div className="select">
-                <select onChange={statusHandler} name="todos" className="filter-todo">
+                <select onChange={statusHandler} name="todos" className="filter-todo" style={applyStyle} onMouseEnter={() => setColor('rgb(255,0,0)')} onMouseLeave={() => setColor('')}>
                     <option value="all">All</option>
                     <option value="completed">Completed</option>
                     <option value="uncompleted">Uncompleted</option>
