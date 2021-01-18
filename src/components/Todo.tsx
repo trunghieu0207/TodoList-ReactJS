@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import {TodoInterface} from '../App'
+import {faCheck, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 type SetTodo = (arg0: any) => void;
 
@@ -36,9 +38,10 @@ const Todo = (props: { setTodo: SetTodo; toDos: TodoInterface[]; toDo: TodoInter
         <div className={'todo'}>
             <li className={`todo-item ${props.toDo.completed ? 'completed' : ''}`}>{props.toDo.text}</li>
             <button onClick={completeHandler} style={styleCompleteBtn} className={'complete-btn'}
-                    onMouseEnter={() => setBgCompleteBtn('rgb(9 160 123)')} onMouseLeave={() => setBgCompleteBtn('')}><i
-                className={'fas fa-check'}/></button>
-            <button onClick={deleteHandler} className={'trash-btn'}><i className={'fas fa-trash'}/></button>
+                    onMouseEnter={() => setBgCompleteBtn('rgb(9 160 123)')} onMouseLeave={() => setBgCompleteBtn('')}>
+                <FontAwesomeIcon icon={faCheck} />
+            </button>
+            <button onClick={deleteHandler} className={'trash-btn'}><FontAwesomeIcon icon={faTrash} /></button>
         </div>
     );
 }
