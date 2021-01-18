@@ -23,16 +23,17 @@ const todos: TodoInterface[] = [
 const handleClick = action('click');
 
 export default {
-    title: 'My Component/TodoList',
+    title: 'My Component/Todo List',
     component: ToDoList
 }
 const Template: Story<ToDoListPropsStory> = (args) => (
     <ToDoList {...args}/>
 );
 
-export const TodoStories = Template.bind({});
-TodoStories.args = {
+export const TodoListStories = Template.bind({});
+TodoListStories.args = {
     filterTodo: todos,
     setToDos: handleClick,
-    toDo: todos[0]
+    toDo: todos[0],
+    toDos: todos
 };
