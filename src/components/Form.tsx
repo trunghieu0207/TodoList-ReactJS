@@ -37,7 +37,6 @@ const Form = ({setInputText, setToDos, toDos, inputText, setStatus}: FormInputPa
         <form>
             <input type="text" className="todo-input" onChange={inputTextHandler}/>
             <button className="todo-button" type="submit" onClick={submitHandler}>
-                {/*<i className="fas fa-plus-square"/>*/}
                 <FontAwesomeIcon icon={faPlusSquare} />
             </button>
             <div className="select">
