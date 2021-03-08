@@ -40,8 +40,7 @@ const Form = ({setInputText, setToDos, toDos, inputText, setStatus}: FormInputPa
                 <FontAwesomeIcon icon={faPlusSquare} />
             </button>
             <div className="select">
-                <select onChange={statusHandler} name="todos" className="filter-todo" style={applyStyle}
-                        onMouseEnter={() => setColor('rgb(255,0,0)')} onMouseLeave={() => setColor('')}>
+                <select onChange={statusHandler} name="todos" className="filter-todo">
                     <option value="all">All</option>
                     <option value="completed">Completed</option>
                     <option value="uncompleted">Uncompleted</option>

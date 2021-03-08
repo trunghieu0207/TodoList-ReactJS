@@ -46,7 +46,7 @@ const Todo = (props: { setTodo: SetTodo; toDos: TodoInterface[]; toDo: TodoInter
                     onMouseEnter={() => setBgCompleteBtn('rgb(9 160 123)')} onMouseLeave={() => setBgCompleteBtn('')}>
                 <FontAwesomeIcon icon={faCheck} />
             </button>
-            <button onClick={deleteHandler} className={'trash-btn'}><FontAwesomeIcon icon={faTrash} /></button>
+            {/*<button onClick={deleteHandler} className={'trash-btn'}><FontAwesomeIcon icon={faTrash} /></button>*/}
         </div>
     );
 }
