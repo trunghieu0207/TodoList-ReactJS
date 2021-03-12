@@ -10,12 +10,12 @@ interface ToDoListPropsStory extends ToDoListProps {
 const todos: TodoInterface[] = [
     {
         completed: true,
-        text: 'string',
+        text: 'Completed',
         id: Math.random() * 1000,
     },
     {
         completed: false,
-        text: 'string',
+        text: 'Uncompleted',
         id: Math.random() * 1000,
     },
 ]

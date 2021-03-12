@@ -1,5 +1,7 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, {useState} from 'react';
 import {TodoInterface} from '../App'
+import {faPlusSquare} from '@fortawesome/free-solid-svg-icons'
 
 type SetFunction = (arg: any) => void;
 
@@ -35,11 +37,10 @@ const Form = ({setInputText, setToDos, toDos, inputText, setStatus}: FormInputPa
         <form>
             <input type="text" className="todo-input" onChange={inputTextHandler}/>
             <button className="todo-button" type="submit" onClick={submitHandler}>
-                <i className="fas fa-plus-square"/>
+                <FontAwesomeIcon icon={faPlusSquare} />
             </button>
             <div className="select">
-                <select onChange={statusHandler} name="todos" className="filter-todo" style={applyStyle}
-                        onMouseEnter={() => setColor('rgb(255,0,0)')} onMouseLeave={() => setColor('')}>
+                <select onChange={statusHandler} name="todos" className="filter-todo">
                     <option value="all">All</option>
                     <option value="completed">Completed</option>
                     <option value="uncompleted">Uncompleted</option>
