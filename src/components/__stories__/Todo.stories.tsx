@@ -5,12 +5,12 @@ import {Story} from "@storybook/react/types-6-0";
 const todos = [
     {
         completed: true,
-        text: 'string',
+        text: 'Completed',
         id: Math.random() * 1000,
     },
     {
         completed: false,
-        text: 'string',
+        text: 'Uncompleted',
         id: Math.random() * 1000,
     },
 ]
