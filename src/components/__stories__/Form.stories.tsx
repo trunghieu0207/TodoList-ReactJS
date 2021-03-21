@@ -14,7 +14,7 @@ const todos: TodoInterface[] = [
     {
         completed: true,
         text: 'string',
-        id: Math.random() * 1000,
+        id: 1
     }
 ]
 
